@@ -139,7 +139,7 @@ func (r *VariableResource) Create(ctx context.Context, req resource.CreateReques
 		return
 	}
 
-	variable, err = r.client.SetVariableInVault(vault, variable)
+	_, err = r.client.SetVariableInVault(vault, variable)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Error creating variable in Mint",
@@ -199,7 +199,7 @@ func (r *VariableResource) Update(ctx context.Context, req resource.UpdateReques
 		Value: plan.Value.ValueString(),
 	}
 
-	variable, err = r.client.SetVariableInVault(vault, variable)
+	_, err = r.client.SetVariableInVault(vault, variable)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Error updating variable in Mint",

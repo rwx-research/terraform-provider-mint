@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
-// TODO(pierre): Maybe remove this
 var (
 	// these will be set by the goreleaser configuration
 	// to appropriate values for the compiled binary.

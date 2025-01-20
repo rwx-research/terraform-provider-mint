@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -54,7 +55,7 @@ func (c Client) DeleteSecretInVault(vault string, secret Secret) error {
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return fmt.Errorf(msg)
+		return errors.New(msg)
 	}
 
 	return nil
@@ -80,7 +81,7 @@ func (c Client) DeleteVariableInVault(vault string, variable Variable) error {
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return fmt.Errorf(msg)
+		return errors.New(msg)
 	}
 
 	return nil
@@ -110,7 +111,7 @@ func (c Client) GetSecretMetadataInVault(vault string, secret Secret) (Secret, e
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return Secret{}, fmt.Errorf(msg)
+		return Secret{}, errors.New(msg)
 	}
 
 	if err := json.NewDecoder(resp.Body).Decode(&secret); err != nil {
@@ -144,7 +145,7 @@ func (c Client) GetVariableInVault(vault string, variable Variable) (Variable, e
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return Variable{}, fmt.Errorf(msg)
+		return Variable{}, errors.New(msg)
 	}
 
 	if err := json.NewDecoder(resp.Body).Decode(&variable); err != nil {
@@ -193,7 +194,7 @@ func (c Client) SetSecretInVault(vault string, secret Secret) (Secret, error) {
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return Secret{}, fmt.Errorf(msg)
+		return Secret{}, errors.New(msg)
 	}
 
 	var response = struct {
@@ -250,7 +251,7 @@ func (c Client) SetVariableInVault(vault string, variable Variable) (Variable, e
 			msg = fmt.Sprintf("Unable to call Mint API - %s", resp.Status)
 		}
 
-		return Variable{}, fmt.Errorf(msg)
+		return Variable{}, errors.New(msg)
 	}
 
 	return variable, nil
