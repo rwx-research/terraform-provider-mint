@@ -36,11 +36,13 @@ func (p *MintProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"host": schema.StringAttribute{
-				Optional: true,
+				Description: "The URI for Mint's API. Default: cloud.rwx.com. This attribute may also be provided via the MINT_HOST environment variable. It is usually only needed for testing or devlopment of the Terraform provider itself.",
+				Optional:    true,
 			},
 			"access_token": schema.StringAttribute{
-				Optional:  true,
-				Sensitive: true,
+				Description: "The access token for Mint's API. This may also be provided via the RWX_ACCESS_TOKEN environment variable.",
+				Optional:    true,
+				Sensitive:   true,
 			},
 		},
 	}

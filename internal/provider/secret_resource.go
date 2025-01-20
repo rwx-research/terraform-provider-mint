@@ -48,7 +48,8 @@ func (r *SecretResource) Schema(ctx context.Context, req resource.SchemaRequest,
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"vault": schema.StringAttribute{
-				Required: true,
+				Description: "The name of a vault in Mint that should hold this secret.",
+				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -61,7 +62,8 @@ func (r *SecretResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"name": schema.StringAttribute{
-				Required: true,
+				Description: "The name of the secret itself.",
+				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -74,14 +76,16 @@ func (r *SecretResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"secret_value": schema.StringAttribute{
-				Required:  true,
-				Sensitive: true,
+				Description: "The secret value.",
+				Required:    true,
+				Sensitive:   true,
 				Validators: []validator.String{
 					stringvalidator.LengthAtLeast(1),
 				},
 			},
 			"description": schema.StringAttribute{
-				Optional: true,
+				Description: "An optional description of this secret.",
+				Optional:    true,
 			},
 		},
 	}

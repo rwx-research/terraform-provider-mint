@@ -49,7 +49,8 @@ func (r *VariableResource) Schema(ctx context.Context, req resource.SchemaReques
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"vault": schema.StringAttribute{
-				Required: true,
+				Description: "The name of a vault in Mint that should hold this variable.",
+				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -62,7 +63,8 @@ func (r *VariableResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"name": schema.StringAttribute{
-				Required: true,
+				Description: "The name of the variable itself.",
+				Required:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -75,7 +77,8 @@ func (r *VariableResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"value": schema.StringAttribute{
-				Required: true,
+				Description: "The value of this variable.",
+				Required:    true,
 				Validators: []validator.String{
 					stringvalidator.LengthAtLeast(1),
 				},
