@@ -14,14 +14,14 @@ func TestSecretResource(t *testing.T) {
 			{
 				Config: providerConfig + `
 resource "mint_secret" "test" {
-  vault        = "default"
+  vault        = "terraform_provider_testing"
   name         = "test-secret"
   secret_value = "foo"
   description  = "a description"
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("mint_secret.test", "vault", "default"),
+					resource.TestCheckResourceAttr("mint_secret.test", "vault", "terraform_provider_testing"),
 					resource.TestCheckResourceAttr("mint_secret.test", "name", "test-secret"),
 					resource.TestCheckResourceAttr("mint_secret.test", "secret_value", "foo"),
 					resource.TestCheckResourceAttr("mint_secret.test", "description", "a description"),
@@ -31,13 +31,13 @@ resource "mint_secret" "test" {
 			{
 				Config: providerConfig + `
 resource "mint_secret" "test" {
-  vault        = "default"
+  vault        = "terraform_provider_testing"
   name         = "test-secret"
   secret_value = "bar"
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("mint_secret.test", "vault", "default"),
+					resource.TestCheckResourceAttr("mint_secret.test", "vault", "terraform_provider_testing"),
 					resource.TestCheckResourceAttr("mint_secret.test", "name", "test-secret"),
 					resource.TestCheckResourceAttr("mint_secret.test", "secret_value", "bar"),
 					resource.TestCheckNoResourceAttr("mint_secret.test", "description"),

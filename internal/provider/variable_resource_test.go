@@ -14,13 +14,13 @@ func TestVariableResource(t *testing.T) {
 			{
 				Config: providerConfig + `
 resource "mint_variable" "test" {
-  vault = "default"
+  vault = "terraform_provider_testing"
   name  = "test-var"
   value = "foo"
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("mint_variable.test", "vault", "default"),
+					resource.TestCheckResourceAttr("mint_variable.test", "vault", "terraform_provider_testing"),
 					resource.TestCheckResourceAttr("mint_variable.test", "name", "test-var"),
 					resource.TestCheckResourceAttr("mint_variable.test", "value", "foo"),
 				),
@@ -29,7 +29,7 @@ resource "mint_variable" "test" {
 			{
 				ResourceName:                         "mint_variable.test",
 				ImportState:                          true,
-				ImportStateId:                        "default/test-var",
+				ImportStateId:                        "terraform_provider_testing/test-var",
 				ImportStateVerify:                    true,
 				ImportStateVerifyIdentifierAttribute: "value",
 			},
@@ -37,13 +37,13 @@ resource "mint_variable" "test" {
 			{
 				Config: providerConfig + `
 resource "mint_variable" "test" {
-  vault = "default"
+  vault = "terraform_provider_testing"
   name  = "test-var"
   value = "bar"
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("mint_variable.test", "vault", "default"),
+					resource.TestCheckResourceAttr("mint_variable.test", "vault", "terraform_provider_testing"),
 					resource.TestCheckResourceAttr("mint_variable.test", "name", "test-var"),
 					resource.TestCheckResourceAttr("mint_variable.test", "value", "bar"),
 				),

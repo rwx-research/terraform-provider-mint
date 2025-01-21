@@ -9,14 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
-var (
-	// these will be set by the goreleaser configuration
-	// to appropriate values for the compiled binary.
-	version string = "dev"
-
-	// goreleaser can pass other information to the main package, such as the specific commit
-	// https://goreleaser.com/cookbooks/using-main.version/
-)
+// Goreleaser will overwrite this with the correct versio number upon release
+var version string = "dev"
 
 func main() {
 	opts := providerserver.ServeOpts{
