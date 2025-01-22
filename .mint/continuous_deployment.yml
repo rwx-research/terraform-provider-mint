@@ -121,6 +121,6 @@ tasks:
     use: [go-modules, goreleaser, import-gpg-key]
     run: goreleaser release --clean
     env:
-      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_TOKEN: ${{ vaults.default.github-apps.rwx-bot.token }}
       GPG_FINGERPRINT: ${{ tasks.import-gpg-key.values.fingerprint }}
-      GPG_PASSPHRASE: ${{ vaults.terraform_provider.github-apps.terraform-provider-release-bot.token }}
+      GPG_PASSPHRASE: ${{ vaults.terraform_provider.secrets.GPG_PASSPHRASE }}
