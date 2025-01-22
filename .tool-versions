@@ -1,0 +1,4 @@
+golang 1.23.5
+golangci-lint 1.63.4
+terraform 1.10.4
+goreleaser 2.5.1
