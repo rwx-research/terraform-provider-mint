@@ -3,8 +3,17 @@ updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      minor-dependencies:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
   - package-ecosystem: "gomod"
     directory: "/tools"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      minor-dependencies:
+        patterns: ["*"]
+        update-types: [minor, patch]
