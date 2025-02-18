@@ -24,4 +24,4 @@ provider "mint" {
 ### Optional
 
 - `access_token` (String, Sensitive) The access token for Mint's API. This may also be provided via the RWX_ACCESS_TOKEN environment variable.
-- `host` (String) The URI for Mint's API. Default: cloud.rwx.com. This attribute may also be provided via the MINT_HOST environment variable. It is usually only needed for testing or devlopment of the Terraform provider itself.
+- `host` (String) The URI for Mint's API. Default: cloud.rwx.com. This attribute may also be provided via the MINT_HOST environment variable. It is usually only needed for testing or development of the Terraform provider itself.
