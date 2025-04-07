@@ -47,7 +47,7 @@ func (c Client) DeleteSecretInVault(vault string, secret Secret) error {
 	if err != nil {
 		return fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 && resp.StatusCode != 404 {
 		msg := extractErrorMessage(resp.Body)
@@ -73,7 +73,7 @@ func (c Client) DeleteVariableInVault(vault string, variable Variable) error {
 	if err != nil {
 		return fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 && resp.StatusCode != 404 {
 		msg := extractErrorMessage(resp.Body)
@@ -99,7 +99,7 @@ func (c Client) GetSecretMetadataInVault(vault string, secret Secret) (Secret, e
 	if err != nil {
 		return Secret{}, fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 {
 		if resp.StatusCode == 404 {
@@ -133,7 +133,7 @@ func (c Client) GetVariableInVault(vault string, variable Variable) (Variable, e
 	if err != nil {
 		return Variable{}, fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 {
 		if resp.StatusCode == 404 {
@@ -182,7 +182,7 @@ func (c Client) SetSecretInVault(vault string, secret Secret) (Secret, error) {
 	if err != nil {
 		return Secret{}, fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 {
 		if resp.StatusCode == 404 {
@@ -239,7 +239,7 @@ func (c Client) SetVariableInVault(vault string, variable Variable) (Variable, e
 	if err != nil {
 		return Variable{}, fmt.Errorf("HTTP request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer resp.Body.Close() //nolint:errcheck
 
 	if resp.StatusCode != 200 {
 		if resp.StatusCode == 404 {
