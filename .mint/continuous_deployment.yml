@@ -21,9 +21,13 @@ concurrency-pools:
     capacity: 1
     on-overflow: cancel-running
 
+base:
+  os: ubuntu 24.04
+  tag: 1.2
+
 tasks:
   - key: code
-    call: mint/git-clone 1.5.1
+    call: git/clone 1.8.0
     with:
       preserve-git-dir: true
       repository: https://github.com/rwx-research/terraform-provider-mint.git
@@ -32,12 +36,12 @@ tasks:
 
   - key: tool-versions
     use: code
-    call: mint/tool-versions 1.0.2
+    call: rwx/tool-versions 1.0.4
     filter:
       - .tool-versions
 
   - key: go
-    call: mint/install-go 1.1.0
+    call: golang/install 1.1.4
     with:
       go-version: ${{ tasks.tool-versions.values.golang }}
 
@@ -61,7 +65,7 @@ tasks:
       TAR_FILE: "goreleaser_Linux_x86_64.tar.gz"
 
   - key: terraform
-    call: hashicorp/install-terraform 1.0.2
+    call: hashicorp/install-terraform 1.0.8
     with:
       terraform-version: ${{ tasks.tool-versions.values.terraform }}
 
