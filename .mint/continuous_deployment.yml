@@ -32,7 +32,6 @@ tasks:
       preserve-git-dir: true
       repository: https://github.com/rwx-research/terraform-provider-mint.git
       ref: ${{ init.commit-sha }}
-      github-access-token: ${{ github.token }}
 
   - key: tool-versions
     use: code
