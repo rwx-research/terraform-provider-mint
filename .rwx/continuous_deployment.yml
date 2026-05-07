@@ -22,26 +22,25 @@ concurrency-pools:
     on-overflow: cancel-running
 
 base:
-  os: ubuntu 24.04
-  tag: 1.2
+  image: ubuntu:24.04
+  config: rwx/base 1.1.0
 
 tasks:
   - key: code
-    call: git/clone 1.8.0
+    call: git/clone 2.0.7
     with:
       preserve-git-dir: true
       repository: https://github.com/rwx-research/terraform-provider-mint.git
       ref: ${{ init.commit-sha }}
-      github-access-token: ${{ github.token }}
 
   - key: tool-versions
     use: code
-    call: rwx/tool-versions 1.0.4
+    call: rwx/tool-versions 1.0.7
     filter:
       - .tool-versions
 
   - key: go
-    call: golang/install 1.1.4
+    call: golang/install 1.2.1
     with:
       go-version: ${{ tasks.tool-versions.values.golang }}
 
@@ -65,7 +64,7 @@ tasks:
       TAR_FILE: "goreleaser_Linux_x86_64.tar.gz"
 
   - key: terraform
-    call: hashicorp/install-terraform 1.0.8
+    call: hashicorp/install-terraform 1.0.12
     with:
       terraform-version: ${{ tasks.tool-versions.values.terraform }}
 
@@ -105,7 +104,7 @@ tasks:
       git diff --exit-code
 
   - key: test
-    use: go-modules
+    use: [go-modules, terraform]
     run: go test -v ./...
     env:
       TF_ACC: 1
@@ -117,7 +116,7 @@ tasks:
       gpg --import --batch --yes << EOF
       ${{ vaults.terraform_provider.secrets.GPG_PRIVATE_KEY }}
       EOF
-      gpg --with-colons --fingerprint security@rwx.com | awk -F':' '$1=="pub"{print $5}' > "${MINT_VALUES}/fingerprint"
+      gpg --with-colons --fingerprint security@rwx.com | awk -F':' '$1=="pub"{print $5}' > "${RWX_VALUES}/fingerprint"
 
   - key: release
     if: ${{ init.release}}
