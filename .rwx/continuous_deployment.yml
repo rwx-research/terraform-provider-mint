@@ -104,7 +104,7 @@ tasks:
       git diff --exit-code
 
   - key: test
-    use: go-modules
+    use: [go-modules, terraform]
     run: go test -v ./...
     env:
       TF_ACC: 1
