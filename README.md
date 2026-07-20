@@ -1,11 +1,10 @@
 # Terraform Mint Provider (Deprecated)
 
 > [!WARNING]
-> **This provider is deprecated and no longer maintained.**
+> **This provider is deprecated.**
 > It has been superseded by the **RWX provider**, published as
 > [`rwx-cloud/rwx`](https://registry.terraform.io/providers/rwx-cloud/rwx) on the
-> Terraform Registry. Please migrate at your earliest convenience — this provider
-> will receive no further releases, bug fixes, or dependency updates.
+> Terraform Registry.
 
 The Mint Provider enabled [Terraform](https://terraform.io) to manage
 [RWX](https://www.rwx.com) resources (vault secrets and variables). Its
